@@ -9,6 +9,8 @@
   "extends": "../../.eslintrc.json",
   "rules": {
     "no-console": "off",
-    "strict": "error"
+    "strict": "error",
+    "unicorn/prefer-module": "off",
+    "unicorn/prefer-node-protocol": "off"
   }
 }

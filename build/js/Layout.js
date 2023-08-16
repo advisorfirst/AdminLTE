@@ -33,6 +33,7 @@ const CLASS_NAME_SIDEBAR_FOCUSED = 'sidebar-focused'
 const CLASS_NAME_LAYOUT_FIXED = 'layout-fixed'
 const CLASS_NAME_CONTROL_SIDEBAR_SLIDE_OPEN = 'control-sidebar-slide-open'
 const CLASS_NAME_CONTROL_SIDEBAR_OPEN = 'control-sidebar-open'
+const CLASS_NAME_IFRAME_MODE = 'iframe-mode'
 
 const Default = {
   scrollbarTheme: 'os-theme-light',
@@ -117,7 +118,11 @@ class Layout {
     const $body = $('body')
     const $selector = $(`${SELECTOR_LOGIN_BOX}, ${SELECTOR_REGISTER_BOX}`)
 
-    if ($selector.length === 0) {
+    if ($body.hasClass(CLASS_NAME_IFRAME_MODE)) {
+      $body.css('height', '100%')
+      $('.wrapper').css('height', '100%')
+      $('html').css('height', '100%')
+    } else if ($selector.length === 0) {
       $body.css('height', 'auto')
       $('html').css('height', 'auto')
     } else {
@@ -205,21 +210,23 @@ class Layout {
   }
 
   // Static
-
-  static _jQueryInterface(config = '') {
+  static _jQueryInterface(config) {
     return this.each(function () {
       let data = $(this).data(DATA_KEY)
-      const _options = $.extend({}, Default, $(this).data())
+      const _config = $.extend({}, Default, typeof config === 'object' ? config : $(this).data())
 
       if (!data) {
-        data = new Layout($(this), _options)
+        data = new Layout($(this), _config)
         $(this).data(DATA_KEY, data)
-      }
-
-      if (config === 'init' || config === '') {
         data._init()
-      } else if (config === 'fixLayoutHeight' || config === 'fixLoginRegisterHeight') {
+      } else if (typeof config === 'string') {
+        if (typeof data[config] === 'undefined') {
+          throw new TypeError(`No method named "${config}"`)
+        }
+
         data[config]()
+      } else if (typeof config === 'undefined') {
+        data._init()
       }
     })
   }

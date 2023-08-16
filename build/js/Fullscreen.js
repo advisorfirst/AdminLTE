@@ -19,6 +19,8 @@ const JQUERY_NO_CONFLICT = $.fn[NAME]
 const SELECTOR_DATA_WIDGET = '[data-widget="fullscreen"]'
 const SELECTOR_ICON = `${SELECTOR_DATA_WIDGET} i`
 
+const EVENT_FULLSCREEN_CHANGE = 'webkitfullscreenchange mozfullscreenchange fullscreenchange MSFullscreenChange'
+
 const Default = {
   minimizeIcon: 'fa-compress-arrows-alt',
   maximizeIcon: 'fa-expand-arrows-alt'
@@ -32,7 +34,7 @@ const Default = {
 class Fullscreen {
   constructor(_element, _options) {
     this.element = _element
-    this.options = $.extend({}, Default, _options)
+    this.options = _options
   }
 
   // Public
@@ -48,6 +50,17 @@ class Fullscreen {
     }
   }
 
+  toggleIcon() {
+    if (document.fullscreenElement ||
+      document.mozFullScreenElement ||
+      document.webkitFullscreenElement ||
+      document.msFullscreenElement) {
+      $(SELECTOR_ICON).removeClass(this.options.maximizeIcon).addClass(this.options.minimizeIcon)
+    } else {
+      $(SELECTOR_ICON).removeClass(this.options.minimizeIcon).addClass(this.options.maximizeIcon)
+    }
+  }
+
   fullscreen() {
     if (document.documentElement.requestFullscreen) {
       document.documentElement.requestFullscreen()
@@ -56,8 +69,6 @@ class Fullscreen {
     } else if (document.documentElement.msRequestFullscreen) {
       document.documentElement.msRequestFullscreen()
     }
-
-    $(SELECTOR_ICON).removeClass(this.options.maximizeIcon).addClass(this.options.minimizeIcon)
   }
 
   windowed() {
@@ -68,29 +79,25 @@ class Fullscreen {
     } else if (document.msExitFullscreen) {
       document.msExitFullscreen()
     }
-
-    $(SELECTOR_ICON).removeClass(this.options.minimizeIcon).addClass(this.options.maximizeIcon)
   }
 
   // Static
-
   static _jQueryInterface(config) {
-    let data = $(this).data(DATA_KEY)
+    return this.each(function () {
+      let data = $(this).data(DATA_KEY)
+      const _config = $.extend({}, Default, typeof config === 'object' ? config : $(this).data())
 
-    if (!data) {
-      data = $(this).data()
-    }
+      if (!data) {
+        data = new Fullscreen($(this), _config)
+        $(this).data(DATA_KEY, data)
+      } else if (typeof config === 'string') {
+        if (typeof data[config] === 'undefined') {
+          throw new TypeError(`No method named "${config}"`)
+        }
 
-    const _options = $.extend({}, Default, typeof config === 'object' ? config : data)
-    const plugin = new Fullscreen($(this), _options)
-
-    $(this).data(DATA_KEY, typeof config === 'object' ? config : data)
-
-    if (typeof config === 'string' && /toggle|fullscreen|windowed/.test(config)) {
-      plugin[config]()
-    } else {
-      plugin.init()
-    }
+        data[config]()
+      }
+    })
   }
 }
 
@@ -100,6 +107,10 @@ class Fullscreen {
   */
 $(document).on('click', SELECTOR_DATA_WIDGET, function () {
   Fullscreen._jQueryInterface.call($(this), 'toggle')
+})
+
+$(document).on(EVENT_FULLSCREEN_CHANGE, () => {
+  Fullscreen._jQueryInterface.call($(SELECTOR_DATA_WIDGET), 'toggleIcon')
 })
 
 /**

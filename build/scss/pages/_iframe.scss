@@ -15,6 +15,10 @@ body.iframe-mode {
 
 body.iframe-mode-fullscreen {
   overflow: hidden;
+
+  &.layout-navbar-fixed .wrapper .content-wrapper {
+    margin-top: 0 !important;
+  }
 }
 
 .content-wrapper {
@@ -28,6 +32,19 @@ body.iframe-mode-fullscreen {
       right: .125rem;
       top: .125rem;
       z-index: 10;
+      visibility: hidden;
+
+      &:hover,
+      &:focus {
+        animation-name: fade-in;
+        animation-duration: $transition-speed;
+        animation-fill-mode: both;
+        visibility: visible;
+      }
+
+      @include on-touch-device() {
+        visibility: visible;
+      }
     }
     .navbar-nav {
       overflow-y: auto;
@@ -38,6 +55,20 @@ body.iframe-mode-fullscreen {
       }
       .nav-item {
         position: relative;
+
+        &:hover,
+        &:focus {
+          .btn-iframe-close {
+            animation-name: fade-in;
+            animation-duration: $transition-speed;
+            animation-fill-mode: both;
+            visibility: visible;
+
+            @include on-touch-device() {
+              visibility: visible;
+            }
+          }
+        }
       }
     }
     .tab-content {
@@ -90,6 +121,22 @@ body.iframe-mode-fullscreen {
       height: 100%;
       min-height: 100%;
       z-index: $zindex-main-sidebar + 10;
+    }
+  }
+}
+
+.permanent-btn-iframe-close {
+  .btn-iframe-close {
+    animation: none !important;
+    visibility: visible !important;
+    opacity: 1;
+  }
+}
+
+@include dark-mode () {
+  .content-wrapper.iframe-mode {
+    .tab-loading {
+      background-color: $dark;
     }
   }
 }

@@ -4,6 +4,8 @@
 [![Packagist](https://img.shields.io/packagist/v/almasaeed2010/adminlte.svg)](https://packagist.org/packages/almasaeed2010/adminlte)
 [![cdn version](https://data.jsdelivr.com/v1/package/npm/admin-lte/badge)](https://www.jsdelivr.com/package/npm/admin-lte)
 [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/from-referrer/)
+[![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/ColorlibHQ/AdminLTE)
+[![Discord Invite](https://img.shields.io/badge/discord-join%20now-green)](https://discord.gg/jfdvjwFqfz)
 
 **AdminLTE** is a fully responsive administration template. Based on **[Bootstrap 4.6](https://getbootstrap.com/)** framework and also the JS/jQuery plugin.
 Highly customizable and easy to use. Fits many screen resolutions from small mobile devices to large desktops.
@@ -21,60 +23,44 @@ prices. Visit <https://adminlte.io/premium> for more information.
 SCSS has been used to increase code customizability.
 
 ## Quick start
-
 There are multiple ways to install AdminLTE.
 
 ### Download & Changelog:
-
 Always Recommended to download from GitHub latest release [AdminLTE 3](https://github.com/ColorlibHQ/AdminLTE/releases/latest) for bug free and latest features.\
 Visit the [releases](https://github.com/ColorlibHQ/AdminLTE/releases) page to view the changelog.\
 Legacy Releases are [AdminLTE 2](https://github.com/ColorlibHQ/AdminLTE/releases/tag/v2.4.18) / [AdminLTE 1](https://github.com/ColorlibHQ/AdminLTE/releases/tag/1.3.1).
 
-### Grab from [jsdelivr](https://www.jsdelivr.com/package/npm/admin-lte) CDN :
-
+## Stable release
+### Grab from [jsdelivr](https://www.jsdelivr.com/package/npm/admin-lte) CDN:
 _**Important Note**: You needed to add separately cdn links for plugins in your project._
-
 ```html
-<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/js/adminlte.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
 ```
-
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/css/adminlte.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
 ```
-
 ### Using The Command Line:
-
-_**Important Note**: To install it via npm/Yarn, you need at least Node.js 10 or higher._
-
-- **Via npm**
-
-    ```bash
-    npm install admin-lte@^3.1 --save
-    ```
-
-- **Via Yarn**
-
-    ```bash
-    yarn add admin-lte@^3.1
-    ```
-
-- **Via Composer**
-
-    ```bash
-    composer require "almasaeed2010/adminlte=~3.1"
-    ```
-
-- **Via Git**
-
-    Clone to your machine
-
-    ```bash
-    git clone https://github.com/ColorlibHQ/AdminLTE.git
-    ```
+_**Important Note**: To install it via npm/Yarn, you need at least Node.js 14 or higher._
+#### Via npm
+```bash
+npm install admin-lte@^3.2 --save
+```
+#### Via Yarn
+```bash
+yarn add admin-lte@^3.2
+```
+#### Via Composer
+```bash
+composer require "almasaeed2010/adminlte=~3.2"
+```
+#### Via Git
+```bash
+git clone https://github.com/ColorlibHQ/AdminLTE.git
+```
 
 ## Documentation
 
-Visit the [online documentation](https://adminlte.io/docs/3.1/) for the most
+Visit the [online documentation](https://adminlte.io/docs/3.2/) for the most
 updated guide. Information will be added on a weekly basis.
 
 ## Browsers support
@@ -83,7 +69,13 @@ updated guide. Information will be added on a weekly basis.
 | --------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- |
 | IE10, IE11, Edge| last 2 versions| last 2 versions| last 2 versions| last 2 versions| last 2 versions| last 2 versions| last 2 versions| last 2 versions
 
-### Compile dist files
+## Light Mode (Only Dark Mode Removed)
+You can use light-mode-only version, if you are not using dark mode and also file size less without dark-mode.
+
+File Location `./dist/css/alt/adminlte.light.css`
+
+
+## Compile dist files
 
 To compile the dist files you need Node.js/npm, clone/download the repo then:
 
