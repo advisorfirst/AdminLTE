@@ -43,8 +43,8 @@ const Default = {
   collapseTrigger: SELECTOR_DATA_COLLAPSE,
   removeTrigger: SELECTOR_DATA_REMOVE,
   maximizeTrigger: SELECTOR_DATA_MAXIMIZE,
-  collapseIcon: 'fa-minus',
-  expandIcon: 'fa-plus',
+  collapseIcon: 'fa-chevron-down',
+  expandIcon: 'fa-chevron-right',
   maximizeIcon: 'fa-expand',
   minimizeIcon: 'fa-compress'
 }
